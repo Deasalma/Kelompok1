@@ -1,38 +1,36 @@
 package com.crud.generic.entity;
 
-//import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.crud.generic.entity.baseEntity.BaseEntity;
+import com.crud.generic.entity.baseEntity.GenericEntity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "Customer")
-
-public class Customer extends BaseEntity{
-//	@Column (name = "No.Handphone", nullable = false , length = 200)
+public class Customer implements GenericEntity<Customer> {
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String nama;
 	private long noHp;
 	private String address;
 	
-	public Customer() {
-		super();		
-	}
-	
-	public String getAddress() {
-		return address;
-	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	@Override
+	public void update(Customer source) {
+		this.nama = source.getNama();
+		this.noHp = source.getNoHp();
+		this.address = source.getAddress();
 	}
-
-	public long getNoHp() {
-		return noHp;
-	}
-
-	public void setNoHp(long noHp) {
-		this.noHp = noHp;
-	}
-
 }

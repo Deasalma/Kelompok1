@@ -1,9 +1,11 @@
 package com.crud.generic.repository.generic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-import com.crud.generic.entity.baseEntity.BaseEntity;
+import com.crud.generic.entity.baseEntity.GenericEntity;
 
-public interface GenericRepository <T extends BaseEntity> extends JpaRepository<T, Long> {
+@NoRepositoryBean
+public interface GenericRepository <T extends GenericEntity<T>> extends JpaRepository<T, Long> {
 
 }
