@@ -1,46 +1,37 @@
 package com.crud.generic.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.crud.generic.entity.baseEntity.BaseEntity;
+import com.crud.generic.entity.baseEntity.GenericEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "Product")
-
-public class Product extends BaseEntity{
-	@Column(name = "availability", nullable = false, length = 200)
+public class Product implements GenericEntity<Product>{
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String nama;
 	private int availability;
 	private double price;
 	private String typeproduct;
-	
-	public Product() {
-		super();		
-	}
 
-	public int getAvailability() {
-		return availability;
+	@Override
+	public void update(Product source) {
+		this.nama = source.getNama();
+		this.availability = source.getAvailability();
+		this.price = source.getPrice();
+		this.typeproduct = source.getTypeproduct();
 	}
-
-	public void setAvailability(int availability) {
-		this.availability = availability;
-	}
-	
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public String getTypeproduct() {
-		return typeproduct;
-	}
-
-	public void setTypeproduct(String typeproduct) {
-		this.typeproduct = typeproduct;
-	}
-
 }
